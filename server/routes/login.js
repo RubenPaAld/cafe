@@ -25,7 +25,8 @@ app.post('/login', (req, res) => {
             res.json({
                 ok: true,
                 usuario: usuarioDb,
-                token
+                token,
+                emisor: req.connection.remoteAddress
             });
         } else {
             return getError(res, 400, 'Usuario o contraseña incorrectos', false);
