@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.8",
     "mongoose-unique-validator": "^2.0.1",
+    "request-ip": "^2.1.1",
     "underscore": "^1.9.1"
   }
 }

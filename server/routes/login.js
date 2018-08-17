@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Usuario = require('../models/usuario');
+const requestIp = require('request-ip');
 const {getError} = require('../errors');
 const app = express();
 
@@ -22,11 +23,13 @@ app.post('/login', (req, res) => {
                                  subject: req.connection.remoteAddress
                                 });
 
+            const clientIp = requestIp.getClientIp(req);
+
             res.json({
                 ok: true,
                 usuario: usuarioDb,
                 token,
-                emisor: req.connection.remoteAddress
+                clientIp
             });
         } else {
             return getError(res, 400, 'Usuario o contraseña incorrectos', false);
