@@ -18,7 +18,6 @@ process.env.SEED = process.env.SEED || 'seed-local';
  */
 process.env.CADUCIDAD_TOKEN = '72h';
 
-
 /**
  * Mongo Database
  **/
@@ -30,3 +29,8 @@ else
     urlDb = process.env.MONGO_URI;
 
 process.env.URL_DB = urlDb;
+
+/**
+ * Google Client ID
+ */
+process.env.CLIENT_ID = process.env.CLIENT_ID || '233473677259-3jsfd0t6a1b3avpult834elanb0hod2b.apps.googleusercontent.com';
