@@ -3,9 +3,11 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 const Usuario = require('../models/usuario');
 const {getError} = require('../errors');
+const {verificacionToken, verificacionUsuario} = require('../middlewares/autenticacion');
+
 const app = express();
 
-app.get('/usuario', (req, res) => {
+app.get('/usuario',verificacionToken ,(req, res) => {
 
     const desde = Number(req.query.desde || 0);
     const limite = Number(req.query.limite || 5);
@@ -30,7 +32,7 @@ app.get('/usuario', (req, res) => {
 
 });
 
-app.post('/usuario', (req, res) => {
+app.post('/usuario',[verificacionToken,verificacionUsuario], (req, res) => {
 
     const body = req.body;
 
@@ -53,7 +55,7 @@ app.post('/usuario', (req, res) => {
 
 });
 
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/:id',[verificacionToken,verificacionUsuario], (req, res) => {
 
     const id = req.params.id;
     const body = _.pick(req.body,['nombre','email','img','role','estado']);
@@ -69,7 +71,7 @@ app.put('/usuario/:id', (req, res) => {
     });
 });
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id',[verificacionToken,verificacionUsuario], (req, res) => {
 
     const id = req.params.id;
     const newEstado = {
@@ -88,7 +90,7 @@ app.delete('/usuario/:id', (req, res) => {
 });
 
 /*
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id',verificacionToken, (req, res) => {
 
     const id = req.params.id;
 

@@ -9,6 +9,17 @@ process.env.PORT = process.env.PORT || 3000;
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 /**
+ * Semilla jwt
+ **/
+process.env.SEED = process.env.SEED || 'seed-local';
+
+/**
+ * Vida jwt
+ */
+process.env.CADUCIDAD_TOKEN = '72h';
+
+
+/**
  * Mongo Database
  **/
 let urlDb;

@@ -1,4 +1,4 @@
-let getError = (res,codigo,message, ok = false,err = undefined) => {
+const getError = (res,codigo,message = undefined, ok = false,err = undefined) => {
 
     return res.status(codigo).json({
         ok: ok,
