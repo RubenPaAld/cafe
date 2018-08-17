@@ -9,6 +9,7 @@ const app = express();
 app.post('/login', (req, res) => {
 
     const body = req.body;
+    const clientIp = requestIp.getClientIp(req);
 
     Usuario.findOne({email: body.email}, (err, usuarioDb) => {
 
@@ -20,15 +21,16 @@ app.post('/login', (req, res) => {
             const token = jwt.sign({
                 usuario: usuarioDb
             },process.env.SEED,{ expiresIn: process.env.CADUCIDAD_TOKEN,
-                                 subject: req.connection.remoteAddress
+                                 subject: clientIp
                                 });
-
-            const clientIp = requestIp.getClientIp(req);
-
             res.json({
                 ok: true,
                 usuario: usuarioDb,
                 token,
+                connection_remote_address: req.connection.remoteAddress,
+                socket_remote_address: req.socket.remoteAddress,
+                //connection_socket_remote_address: req.connection.socket.remoteAddress,
+               // info_remote_address: req.info.remoteAddress,
                 clientIp
             });
         } else {

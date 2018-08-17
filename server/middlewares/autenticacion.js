@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const requestIp = require('request-ip');
 const {getError} = require('../errors');
 
 /**
