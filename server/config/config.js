@@ -14,6 +14,11 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 process.env.SEED = process.env.SEED || 'seed-local';
 
 /**
+ * Directorio subida archivos
+ */
+process.env.UPLOAD = 'uploads/';
+
+/**
  * Vida jwt
  */
 process.env.CADUCIDAD_TOKEN = '72h';

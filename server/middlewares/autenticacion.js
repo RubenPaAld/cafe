@@ -19,6 +19,19 @@ const verificacionToken = (req, res, next) => {
     });
 };
 
+const verificacionTokenURL = (req, res, next) => {
+    const token = req.query.token;
+    const clientIp = requestIp.getClientIp(req);
+
+    jwt.verify(token,process.env.SEED,{subject: clientIp} ,(err,decoded) => {
+
+        if (err)
+            return getError(res,401,'error de token',false,err);
+
+        req.usuario = decoded.usuario;
+        next();
+    });
+};
 const verificacionUsuario = (req, res, next) => {
     const usuario = req.usuario;
 
@@ -31,5 +44,6 @@ const verificacionUsuario = (req, res, next) => {
 
 module.exports = {
     verificacionToken,
-    verificacionUsuario
+    verificacionUsuario,
+    verificacionTokenURL
 };
